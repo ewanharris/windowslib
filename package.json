@@ -1,0 +1,50 @@
+{
+  "name": "windowslib",
+  "version": "1.0.0",
+  "description": "Windows Phone Utility Library",
+  "main": "./dist/index",
+  "author": "Axway, Inc. <npmjs@appcelerator.com>",
+  "maintainers": [
+    "Chris Barber <cbarber@axway.com>",
+    "Chris Williams <cwilliams@axway.com",
+    "Kota Iguchi <kiguchi@appcelerator.com",
+    "Ewan Harris <eharris@axway.com"
+  ],
+  "keywords": [
+    "appcelerator",
+    "windows",
+    "windows mobile",
+    "winstore",
+    "windows store",
+    "visualstudio",
+    "visual studio",
+    "microsoft"
+  ],
+  "scripts": {
+    "build": "gulp build",
+    "coverage": "gulp coverage",
+    "docs": "gulp docs",
+    "prepare": "gulp build",
+    "test": "gulp test"
+  },
+  "dependencies": {
+    "appcd-path": "^1.0.0",
+    "appcd-util": "^1.0.0",
+    "appcd-winreg": "^1.0.0",
+    "semver": "^5.4.1",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "appcd-gulp": "^1.0.0",
+    "gulp": "^3.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/appcelerator/windowslib.git"
+  },
+  "homepage": "https://github.com/appcelerator/windowslib",
+  "bugs": "https://github.com/appcelerator/windowslib/issues",
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
