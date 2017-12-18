@@ -5,8 +5,16 @@ if (!Error.prepareStackTrace) {
 
 export { default as options } from './options';
 
-import * as sdk from './sdk';
+import SDK, * as sdk from './sdk';
+import SDKExtension from './sdk-extension';
+import SDKRevision from './sdk-revision';
+import VSWhere, * as vswhere from './vswhere';
 
 export {
-	sdk
+	SDK,
+	sdk,
+	SDKExtension,
+	SDKRevision,
+	VSWhere,
+	vswhere,
 };

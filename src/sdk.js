@@ -9,7 +9,7 @@ import { findExecutables } from './utilities';
 import { expandPath } from 'appcd-path';
 import { isDir, isFile } from 'appcd-fs';
 
-export class SDK {
+export default class SDK {
 
 	/**
 	 * Checks if the specified directory is a Windows SDK.

@@ -8,39 +8,39 @@ const sdkMockDir = path.join(__dirname, 'mocks', 'sdk');
 describe('SDK', () => {
 	it('should error if directory is invalid', () => {
 		expect(() => {
-			new windowslib.sdk.SDK();
+			new windowslib.SDK();
 		}).to.throw(TypeError, 'Expected directory to be a valid string');
 
 		expect(() => {
-			new windowslib.sdk.SDK(123);
+			new windowslib.SDK(123);
 		}).to.throw(TypeError, 'Expected directory to be a valid string');
 
 		expect(() => {
-			new windowslib.sdk.SDK('');
+			new windowslib.SDK('');
 		}).to.throw(TypeError, 'Expected directory to be a valid string');
 	});
 
 	it('should error if directory does not exist', () => {
 		expect(() => {
-			new windowslib.sdk.SDK(path.join(__dirname, 'doesnotexist'));
+			new windowslib.SDK(path.join(__dirname, 'doesnotexist'));
 		}).to.throw(Error, 'Directory does not exist');
 	});
 
 	it('should error if "SDKManifest.xml" file is missing', () => {
 		expect(() => {
-			new windowslib.sdk.SDK(path.join(mockDir, 'empty'));
+			new windowslib.SDK(path.join(mockDir, 'empty'));
 		}).to.throw(Error, 'Directory does not contain an "SDKManifest.xml" file');
 	});
 
 	it('should error if "SDKManifest.xml" file is bad', () => {
 		expect(() => {
-			new windowslib.sdk.SDK(path.join(sdkMockDir, 'bad-manifest'));
+			new windowslib.SDK(path.join(sdkMockDir, 'bad-manifest'));
 		}).to.throw(Error, 'Unable to read "SDKManifest.xml" file');
 	});
 
 	it('should detect a normal 8.1 SDK', () => {
 		const dir = path.join(sdkMockDir, '8.1');
-		const results = new windowslib.sdk.SDK(dir);
+		const results = new windowslib.SDK(dir);
 
 		expect(results).to.deep.equal({
 			path: dir,
@@ -66,13 +66,13 @@ describe('SDK', () => {
 		});
 	});
 
-	it('should detect a 10.0 SDK with revision before 10.0.X.0', () => {
+	it.skip('should detect a 10.0 SDK with revision before 10.0.X.0', () => {
 
 	});
 
 	it('should detect a 10.0 SDK with revision after 10.0.X.0', () => {
 		const dir = path.join(sdkMockDir, 'after', '10');
-		const results = new windowslib.sdk.SDK(dir);
+		const results = new windowslib.SDK(dir);
 
 		expect(results).to.deep.equal({
 			path: dir,
@@ -157,5 +157,91 @@ describe('SDK', () => {
 				}
 			]
 		});
+	});
+});
+
+describe('SDKExtension', () => {
+	it('should error if directory is invalid', () => {
+		expect(() => {
+			new windowslib.SDKExtension();
+		}).to.throw(TypeError, 'Expected directory to be a valid string');
+
+		expect(() => {
+			new windowslib.SDKExtension(123);
+		}).to.throw(TypeError, 'Expected directory to be a valid string');
+
+		expect(() => {
+			new windowslib.SDKExtension('');
+		}).to.throw(TypeError, 'Expected directory to be a valid string');
+	});
+
+	it('should error if directory does not exist', () => {
+		expect(() => {
+			new windowslib.SDKExtension(path.join(__dirname, 'doesnotexist'));
+		}).to.throw(Error, 'Directory does not exist');
+	});
+
+	it('should error if "SDKManifest.xml" file is missing', () => {
+		expect(() => {
+			new windowslib.SDKExtension(path.join(mockDir, 'empty'));
+		}).to.throw(Error, 'Directory does not contain an "SDKManifest.xml" file');
+	});
+
+	it('should error if "SDKManifest.xml" file is bad', () => {
+		expect(() => {
+			new windowslib.SDKExtension(path.join(sdkMockDir, 'bad-manifest'));
+		}).to.throw(Error, 'Unable to read "SDKManifest.xml" file');
+	});
+});
+
+describe('SDKRevision', () => {
+	it('should error if directory or revision is invalid', () => {
+		expect(() => {
+			new windowslib.SDKRevision();
+		}).to.throw(TypeError, 'Expected mainDir to be a valid string');
+
+		expect(() => {
+			new windowslib.SDKRevision(123);
+		}).to.throw(TypeError, 'Expected mainDir to be a valid string');
+
+		expect(() => {
+			new windowslib.SDKRevision('');
+		}).to.throw(TypeError, 'Expected mainDir to be a valid string');
+
+		expect(() => {
+			new windowslib.SDKRevision('C:\\ADir');
+		}).to.throw(TypeError, 'Expected revisionNumber to be a valid string');
+
+		expect(() => {
+			new windowslib.SDKRevision('C:\\ADir', 123);
+		}).to.throw(TypeError, 'Expected revisionNumber to be a valid string');
+
+		expect(() => {
+			new windowslib.SDKRevision('C:\\ADir', '');
+		}).to.throw(TypeError, 'Expected revisionNumber to be a valid string');
+	});
+
+	it('should error if windows.h does not exist', () => {
+		expect(() => {
+			new windowslib.SDKRevision(path.join(sdkMockDir, 'revision'), '10.0.16299.0');
+		}).to.throw(Error, 'SDK revision does not contain "windows.h"');
+	});
+
+	it('should error if "Platform.xml" file is missing', () => {
+		expect(() => {
+			new windowslib.SDKRevision(path.join(sdkMockDir, 'revision'), '10.0.10150.0');
+		}).to.throw(Error, 'SDK Revision does not contain a "Platform.xml" file');
+	});
+
+	it('should error if "Platform.xml" file is bad', () => {
+		expect(() => {
+			new windowslib.SDKRevision(path.join(sdkMockDir, 'revision'), '10.0.10240.0');
+		}).to.throw(Error, 'Unable to read "Platform.xml" file');
+	});
+
+	it('should error if Platform.xml version does not match directory name', () => {
+		expect(() => {
+			new windowslib.SDKRevision(path.join(sdkMockDir, 'revision'), '10.0.10586.0');
+		}).to.throw(Error, 'Version in "Platform.xml" does not match directory name');
 	});
 });
