@@ -8,6 +8,7 @@ export { default as options } from './options';
 import SDK, * as sdk from './sdk';
 import SDKExtension from './sdk-extension';
 import SDKRevision from './sdk-revision';
+import VisualStudio from './visualstudio';
 import VSWhere, * as vswhere from './vswhere';
 
 export {
@@ -15,6 +16,7 @@ export {
 	sdk,
 	SDKExtension,
 	SDKRevision,
+	VisualStudio,
 	VSWhere,
 	vswhere,
 };
