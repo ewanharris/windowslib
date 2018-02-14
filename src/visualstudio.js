@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export const defaultVSWhereLocation = '%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer\\vswhere.exe';
+export const defaultInstallDir = '%ProgramFiles(x86)%\\Microsoft Visual Studio';
 
 export class VisualStudio {
 

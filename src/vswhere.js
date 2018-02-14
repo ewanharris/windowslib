@@ -6,7 +6,7 @@ import { expandPath } from 'appcd-path';
 import { isFile, isDir } from 'appcd-fs';
 import { run } from 'appcd-subprocess';
 
-export const defaultLocation = '%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer\\vswhere.exe';
+export const defaultPath = '%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer\\vswhere.exe';
 
 export class VSWhere {
 
@@ -15,7 +15,7 @@ export class VSWhere {
 	 *
 	 * @param {String} exe - Path to the 'vswhere' executable
 	 */
-	constructor(exe = defaultLocation) {
+	constructor(exe) {
 		if (typeof exe !== 'string' || !exe) {
 			throw new TypeError('Expected executable to be a valid string');
 		}
@@ -82,7 +82,7 @@ export default VSWhere;
  */
 export function getVSWhere(force) {
 	return cache('vswhere:get', force, () => {
-		const searchPaths = arrayify(get(options, 'vswhere.searchPaths') || defaultLocation);
+		const searchPaths = arrayify(get(options, 'vswhere.searchPaths') || defaultPath);
 
 		for (let item of searchPaths) {
 			try {
