@@ -4,6 +4,7 @@ import path from 'path';
 import { DOMParser } from 'xmldom';
 import { findExecutables } from './utilities';
 import { isDir, isFile } from 'appcd-fs';
+import { WinAppDeployCmd } from './device';
 
 export class SDKRevision {
 
@@ -74,6 +75,16 @@ export class SDKRevision {
 			'WinAppDeployCmd'
 		];
 		this.executables = findExecutables(this.binDir, mainDir, executables);
+
+		if (this.executables.WinAppDeployCmd) {
+			for (const exe in this.executables.WinAppDeployCmd) {
+				try {
+					this.executables.WinAppDeployCmd[exe] = new WinAppDeployCmd(this.executables.WinAppDeployCmd[exe]);
+				} catch (e) {
+					// Shrug
+				}
+			}
+		}
 	}
 }
 

@@ -113,7 +113,9 @@ describe('SDK', () => {
 							x64: path.join(dir, 'bin', '10.0.16299.0', 'x64', 'pvk2pfx.exe')
 						},
 						WinAppDeployCmd: {
-							x86: path.join(dir, 'bin', '10.0.16299.0', 'x86', 'WinAppDeployCmd.exe')
+							x86: {
+								exe: path.join(dir, 'bin', '10.0.16299.0', 'x86', 'WinAppDeployCmd.exe')
+							}
 						}
 					}
 				}

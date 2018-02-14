@@ -65,7 +65,8 @@ export default class SDK {
 
 			const includePath = path.join(this.path, 'Include');
 			if (fs.existsSync(includePath)) {
-				const revisionDirs = fs.readdirSync(includePath);
+				// Reverse the array, so the newest SDK is in the first index of the array
+				const revisionDirs = fs.readdirSync(includePath).reverse();
 
 				for (const revision of revisionDirs) {
 					try {
@@ -73,7 +74,7 @@ export default class SDK {
 						// break;
 					} catch (err) {
 						// Do nothing
-						// console.log(err);
+						console.log(err);
 					}
 				}
 			}
@@ -94,6 +95,7 @@ export default class SDK {
 				}
 			}
 
+			// FIXME: Is this the right place? Difficult to decide
 			const extensionDir = path.join(this.path, 'Extension SDKs');
 			if (isDir(extensionDir)) {
 				/* eslint-disable max-depth */
